@@ -9,11 +9,11 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(237, 81, 158, 100),
       appBar: AppBar(
         title:
             const Text('İNGİLİZCE ÖĞRENİYORUZ', style: TextStyle(fontSize: 20)),
-        backgroundColor: Colors.orange,
+        backgroundColor: Color.fromARGB(255, 13, 93, 26),
       ),
       body: Container(
         margin: const EdgeInsets.fromLTRB(15, 150, 15, 50),
@@ -33,18 +33,19 @@ class MainMenu extends StatelessWidget {
                 ),
                 label: const Text(""),
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.orangeAccent,
+                    primary: Color.fromARGB(255, 13, 93, 26),
                     padding: const EdgeInsets.fromLTRB(60, 20, 70, 20),
                     shape: const StadiumBorder(
                       side: BorderSide(color: Colors.white, width: 4),
                     ))),
+            SizedBox(height: 10),
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const Calisma()));
                 },
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.orangeAccent,
+                    primary: Color.fromARGB(255, 13, 93, 26),
                     padding: const EdgeInsets.fromLTRB(70, 25, 70, 25),
                     shape: const StadiumBorder(
                       side: BorderSide(color: Colors.white, width: 4),
@@ -53,13 +54,14 @@ class MainMenu extends StatelessWidget {
                   'Çalışma',
                   style: TextStyle(fontSize: 35),
                 )),
+            SizedBox(height: 10),
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const Words()));
                 },
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.orangeAccent,
+                    primary: Color.fromARGB(255, 13, 93, 26),
                     padding: const EdgeInsets.fromLTRB(70, 25, 70, 25),
                     shape: const StadiumBorder(
                       side: BorderSide(color: Colors.white, width: 4),

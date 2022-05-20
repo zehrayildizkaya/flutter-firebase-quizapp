@@ -1,4 +1,4 @@
-/* import 'package:zehra/gradient_box.dart';
+import 'package:zehra/arka_plan.dart';
 import 'package:zehra/main_menu.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
-          child: GradientBox(
+          child: ArkaPlan(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -30,4 +30,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
- */
+ 

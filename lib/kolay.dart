@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:zehra/gradient_box.dart';
+import 'package:zehra/arka_plan.dart';
 import 'package:zehra/question.dart';
 import 'package:zehra/sonuc_screen.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,7 @@ class _KolayState extends State<Kolay> {
   Widget build(BuildContext context) {
     final currentQuestion = widget.questions[_currentIndex];
     return Scaffold(
-        body: GradientBox(
+        body: ArkaPlan(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -113,7 +113,7 @@ class _KolayState extends State<Kolay> {
                       }
                     }
 
-                    Future.delayed(const Duration(milliseconds: 300), () {
+                    Future.delayed(const Duration(milliseconds: 200), () {
                       _score = _score;
                       if (_currentIndex == widget.questions.length - 1) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(

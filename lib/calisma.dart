@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:zehra/gradient_box.dart';
+import 'package:zehra/arka_plan.dart';
 import 'package:zehra/kolay.dart';
 import 'package:zehra/kolay_buton.dart';
 import 'package:zehra/question.dart';
@@ -13,13 +13,13 @@ class Calisma extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 200, 245, 216),
       appBar: AppBar(
         title: const Text('ÇALIŞMA', style: TextStyle(fontSize: 25)),
-        backgroundColor: Colors.cyan.shade900,
+        backgroundColor: Color.fromARGB(255, 9, 68, 27),
       ),
       body: SizedBox.expand(
-          child: GradientBox(
+          child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,13 +43,13 @@ class Calisma extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => Kolay(
-                                  totalTime: 10,
-                                  questions: questions,
-                                  katsayi : 1
-                                )));
+                                totalTime: 120,
+                                questions: questions,
+                                katsayi: 1)));
                       },
                       title: "Kolay");
                 }),
+            SizedBox(height: 25),
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('questionstwo')
@@ -69,13 +69,14 @@ class Calisma extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => Kolay(
-                                  totalTime: 10,
+                                  totalTime: 150,
                                   questions: questions,
                                   katsayi: 2,
                                 )));
                       },
                       title: "Orta");
                 }),
+            SizedBox(height: 25),
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('questionsthree')
@@ -95,10 +96,9 @@ class Calisma extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => Kolay(
-                                  totalTime: 10,
-                                  questions: questions,
-                                  katsayi: 3
-                                )));
+                                totalTime: 180,
+                                questions: questions,
+                                katsayi: 3)));
                       },
                       title: "Zor");
                 }),

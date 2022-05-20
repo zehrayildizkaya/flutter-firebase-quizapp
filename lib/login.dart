@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zehra/register.dart';
 import 'package:zehra/siralama_buton.dart';
 import 'package:zehra/text_widget1.dart';
 import 'package:zehra/text_widget2.dart';
@@ -24,12 +25,12 @@ class _LoginPageState extends State<LoginPage> {
     auth = FirebaseAuth.instance;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            const Text('İngilizce Öğreniyorum', style: TextStyle(fontSize: 20)),
+        title: const Text('İngilizce Öğreniyorum', style: TextStyle(fontSize: 20)),
         backgroundColor: Colors.green,
       ),
       resizeToAvoidBottomInset: false,
@@ -50,25 +51,11 @@ class _LoginPageState extends State<LoginPage> {
               const Padding(
                   padding: EdgeInsets.fromLTRB(30.0, 0, 30.0, 0),
                   child: TextWidget2()),
-              const SizedBox(height: 30),
-              TextButton(
-                onPressed: (() {
-                  kayitYap(email, sifre);
-                }),
-                child: const Text(
-                  "Kayıt Ol",
-                  style: TextStyle(
-                      fontSize: 15, color: Color.fromARGB(255, 0, 162, 199)),
-                ),
-                style: TextButton.styleFrom(
-                    side: const BorderSide(
-                        color: Color.fromARGB(255, 0, 162, 199)),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12)))),
-              ),
-              TextButton(
+              const SizedBox(height: 50),
+                       TextButton(
                 onPressed: (() {
                   girisYap(email, sifre);
+                  
                 }),
                 child: const Text(
                   "Oturum Aç",
@@ -81,9 +68,31 @@ class _LoginPageState extends State<LoginPage> {
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12)))),
               ),
-              SizedBox(height:20),
-              
-
+              const SizedBox(height: 7),
+              const SizedBox(
+                height: 20,
+                child: Text(
+                  " YA DA",
+                  style: TextStyle(color: Color.fromARGB(255, 22, 108, 178)),
+                ),
+              ),
+              const SizedBox(height: 7),
+              TextButton(
+                onPressed: (() {
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (context) => Register()));
+                }),
+                child: const Text(
+                  "Kayıt Ol",
+                  style: TextStyle(
+                      fontSize: 15, color: Color.fromARGB(255, 0, 162, 199)),
+                ),
+                style: TextButton.styleFrom(
+                    side: const BorderSide(
+                        color: Color.fromARGB(255, 0, 162, 199)),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)))),
+              ),
             ],
           ),
         ),
@@ -91,21 +100,11 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void createUserEmailAndPassword() async {
-    var _userCredential = await auth.createUserWithEmailAndPassword(
-        email: email.text, password: sifre.text);
-    print(_userCredential.toString());
-  }
-
-  kayitYap(TextEditingController email, TextEditingController sifre) {
-    FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email.text, password: sifre.text);
-  }
-
   girisYap(TextEditingController email, TextEditingController sifre) {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email.text, password: sifre.text)
         .then((user) {
+  
       Navigator.push(
           context, CupertinoPageRoute(builder: (context) => const MainMenu()));
     });

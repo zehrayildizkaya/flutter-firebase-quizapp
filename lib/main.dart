@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:zehra/login.dart';
+import 'package:zehra/main_page.dart';
 import 'firebase_options.dart';
 import 'package:zehra/home_page.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const LoginPage(),
+      home: const MainPage(),
     );
   }
 }

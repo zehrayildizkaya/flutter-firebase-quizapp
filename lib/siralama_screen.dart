@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:zehra/gradient_box.dart';
+import 'package:zehra/arka_plan.dart';
 
 class SiralamaScreen extends StatelessWidget {
   const SiralamaScreen({Key? key}) : super(key: key);
@@ -8,7 +8,7 @@ class SiralamaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GradientBox(
+        body: ArkaPlan(
             child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(

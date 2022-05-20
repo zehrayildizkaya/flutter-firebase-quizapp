@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:zehra/arka_plan.dart';
 import 'package:zehra/calisma.dart';
-import 'package:zehra/gradient_box.dart';
 
 import 'package:zehra/kolay_buton.dart';
 import 'package:zehra/question.dart';
 import 'package:flutter/material.dart';
 
 class SonucScreen extends StatefulWidget {
-  const SonucScreen({Key? key, required this.score, required this.questions, re})
+  const SonucScreen(
+      {Key? key, required this.score, required this.questions, re})
       : super(key: key);
 
   final int score;
@@ -23,7 +24,7 @@ class _SonucScreenState extends State<SonucScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
-        child: GradientBox(
+        child: ArkaPlan(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -34,8 +35,8 @@ class _SonucScreenState extends State<SonucScreen> {
               KolayButton(
                   title: 'Başa Dön',
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Calisma()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Calisma()));
                   })
             ],
           ),
@@ -67,8 +68,8 @@ class _SonucScreenState extends State<SonucScreen> {
       return;
     }
     userRef.set({
-      'email' : authUser.email,
-      'score' : widget.score,
-     });
+      'email': authUser.email,
+      'score': widget.score,
+    });
   }
 }
