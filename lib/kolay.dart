@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:math';
 import 'package:zehra/arka_plan.dart';
 import 'package:zehra/question.dart';
 import 'package:zehra/sonuc_screen.dart';
@@ -23,10 +23,11 @@ class Kolay extends StatefulWidget {
 
 class _KolayState extends State<Kolay> {
   late int _currentTime;
+  late int _currentIndex = 0;
   late Timer _timer;
-  int _currentIndex = 0;
   String _selectedAnswer = "";
   int _score = 0;
+  var random = Random().nextInt(9);
 
   @override
   void initState() {
@@ -57,7 +58,7 @@ class _KolayState extends State<Kolay> {
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = widget.questions[_currentIndex];
+    final currentQuestion = widget.questions[random];
     return Scaffold(
         body: ArkaPlan(
       child: Padding(
@@ -115,7 +116,7 @@ class _KolayState extends State<Kolay> {
 
                     Future.delayed(const Duration(milliseconds: 200), () {
                       _score = _score;
-                      if (_currentIndex == widget.questions.length - 1) {
+                      if (_currentIndex == 4) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => SonucScreen(
                                   questions: widget.questions,
@@ -125,6 +126,7 @@ class _KolayState extends State<Kolay> {
                       }
                       setState(() {
                         _currentIndex++;
+                        random = Random().nextInt(9);
                         _selectedAnswer = '';
                       });
                     });

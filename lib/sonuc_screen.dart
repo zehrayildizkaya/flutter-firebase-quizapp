@@ -8,9 +8,11 @@ import 'package:zehra/question.dart';
 import 'package:flutter/material.dart';
 
 class SonucScreen extends StatefulWidget {
-  const SonucScreen(
-      {Key? key, required this.score, required this.questions, re})
-      : super(key: key);
+  const SonucScreen({
+    Key? key,
+    required this.score,
+    required this.questions,
+  }) : super(key: key);
 
   final int score;
   final List<Question> questions;
@@ -28,14 +30,19 @@ class _SonucScreenState extends State<SonucScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Sonuç: ${widget.score} /  ${widget.questions.length}"),
+              Text("Sonuç: ${widget.score} / 5",
+                  style: TextStyle(fontSize: 20)),
+              const SizedBox(
+                height: 30,
+              ),
+              Text("Puan: ${widget.score}", style: TextStyle(fontSize: 20)),
               const SizedBox(
                 height: 50,
               ),
               KolayButton(
                   title: 'Başa Dön',
                   onTap: () {
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => Calisma()));
                   })
             ],
@@ -55,7 +62,7 @@ class _SonucScreenState extends State<SonucScreen> {
     final authUser = FirebaseAuth.instance.currentUser;
     if (authUser == null) return;
     final userRef =
-        FirebaseFirestore.instance.collection('users').doc(authUser.uid);
+        FirebaseFirestore.instance.collection('users').doc(authUser.email);
     final userDoc = await userRef.get();
     if (userDoc.exists) {
       final user = userDoc.data();

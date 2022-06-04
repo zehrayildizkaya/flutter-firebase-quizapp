@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zehra/login.dart';
 import 'package:zehra/text_widget1.dart';
 import 'package:zehra/text_widget2.dart';
@@ -14,6 +16,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   late FirebaseAuth auth;
+  var sayi = 0;
   @override
   void initState() {
     super.initState();
@@ -69,6 +72,19 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  Future<void> _updateHighScore() async {
+    final authUser = FirebaseAuth.instance.currentUser;
+    if (authUser == null) return;
+    final userRef =
+        FirebaseFirestore.instance.collection('users').doc(authUser.email);
+    userRef.set({
+      'email': authUser.email,
+      'score': 0,
+      'profilUrl':
+          'https://firebasestorage.googleapis.com/v0/b/zehrakaya-ae4bf.appspot.com/o/files%2Fprofilbos%2Fuser-member-avatar-face-profile-icon-vector-22965342-e1619819871835.jpg?alt=media&token=0c44cae3-23d1-4471-92a0-753ab4722b58'
+    });
+  }
+
   void createUserEmailAndPassword() async {
     var _userCredential = await auth.createUserWithEmailAndPassword(
         email: email.text, password: sifre.text);
@@ -79,8 +95,34 @@ class _RegisterState extends State<Register> {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email.text, password: sifre.text)
         .then((user) {
-      Navigator.push(
+      Fluttertoast.showToast(
+        msg: "Kayıt başarılı",
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      sayi = 2;
+      _updateHighScore();
+
+      Navigator.pushReplacement(
           context, CupertinoPageRoute(builder: (context) => LoginPage()));
     });
+
+    toast();
+  }
+
+  void toast() {
+    if (sayi == 0) {
+      Fluttertoast.showToast(
+        msg: "Zaten kayıtlı",
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
   }
 }

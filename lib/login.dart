@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zehra/main_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,18 +20,19 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   late FirebaseAuth auth;
+  var sayi;
   @override
   void initState() {
     super.initState();
     auth = FirebaseAuth.instance;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('İngilizce Öğreniyorum', style: TextStyle(fontSize: 20)),
+        title:
+            const Text('İngilizce Öğreniyorum', style: TextStyle(fontSize: 20)),
         backgroundColor: Colors.green,
       ),
       resizeToAvoidBottomInset: false,
@@ -52,10 +54,9 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.fromLTRB(30.0, 0, 30.0, 0),
                   child: TextWidget2()),
               const SizedBox(height: 50),
-                       TextButton(
+              TextButton(
                 onPressed: (() {
                   girisYap(email, sifre);
-                  
                 }),
                 child: const Text(
                   "Oturum Aç",
@@ -101,12 +102,32 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   girisYap(TextEditingController email, TextEditingController sifre) {
+    sayi = 0;
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email.text, password: sifre.text)
         .then((user) {
-  
-      Navigator.push(
+      sayi = 1;
+      Navigator.pushReplacement(
           context, CupertinoPageRoute(builder: (context) => const MainMenu()));
+      Fluttertoast.showToast(
+        msg: "Giriş başarılı",
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     });
+
+    if (sayi == 0) {
+      Fluttertoast.showToast(
+        msg: "giriş başarısız",
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
   }
 }

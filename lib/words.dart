@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zehra/arka_plan.dart';
-
+import 'package:zehra/words_ekleme.dart';
 
 class Words extends StatelessWidget {
   const Words({Key? key}) : super(key: key);
@@ -15,8 +16,25 @@ class Words extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 40),
-                    const Text('Kelimeler', style: TextStyle(fontSize: 30)),
-                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        const Text('Kelimeler', style: TextStyle(fontSize: 30)),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => WordsEkleme()));
+                            },
+                            icon: new Icon(Icons.add_card))
+                      ],
+                    ),
                     Expanded(
                       child: StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
@@ -34,7 +52,12 @@ class Words extends StatelessWidget {
                                 return Card(
                                   child: ListTile(
                                     title: Text(users[index]['word']),
-                                    trailing: Text(users[index]['mean']),
+                                    subtitle: Text(users[index]['mean']),
+                                    trailing: IconButton(
+                                        icon: Icon(Icons.delete),
+                                        onPressed: () async {
+                                          await users[index].reference.delete();
+                                        }),
                                   ),
                                 );
                               },

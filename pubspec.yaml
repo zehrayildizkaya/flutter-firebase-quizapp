@@ -43,6 +43,7 @@ dependencies:
   image_picker_for_web: ^2.1.8
   firebase_storage: ^10.2.16
   path: ^1.8.0
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

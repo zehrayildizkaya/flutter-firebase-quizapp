@@ -94,7 +94,7 @@ class Calisma extends StatelessWidget {
 
                   return KolayButton(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => Kolay(
                                 totalTime: 180,
                                 questions: questions,
